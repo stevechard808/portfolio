@@ -12,7 +12,6 @@
 
     :root {
       --bg: #202124;
-      --surface: #2a2a2d;
       --text-primary: #e8eaed;
       --text-secondary: #9aa0a6;
       --text-muted: #5f6368;
@@ -39,9 +38,11 @@
     }
 
     .design-icon {
-      width: 72px;
-      height: 65px;
+      width: 100%;
+      max-width: 72px;
+      height: auto;
       margin-bottom: 24px;
+      display: block;
     }
 
     .title-row {
@@ -104,12 +105,7 @@
       margin-bottom: 12px;
     }
 
-    .message a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .message a:hover { text-decoration: underline; }
+    .message strong { color: var(--text-primary); font-weight: 500; }
 
     .error-code {
       font-size: 12px;
@@ -133,10 +129,7 @@
       margin-bottom: 24px;
     }
 
-    .real-message strong {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
+    .real-message strong { color: var(--text-primary); font-weight: 500; }
 
     .actions {
       display: flex;
@@ -177,20 +170,6 @@
 
     .btn-primary:hover { background: #aecbfa; }
 
-    .details-panel {
-      display: none;
-      margin-top: 20px;
-      font-size: 12px;
-      color: var(--text-muted);
-      font-family: monospace;
-      background: #1a1a1d;
-      padding: 12px 16px;
-      border-radius: 8px;
-      line-height: 1.8;
-    }
-
-    .details-panel.open { display: block; }
-
     @media (max-width: 480px) {
       h1 { font-size: 20px; }
       .btn { width: 100%; text-align: center; }
@@ -201,19 +180,18 @@
 
   <div class="container">
 
-    <!-- Animated monitor icon -->
-    <svg class="design-icon" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+    <svg class="design-icon" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" preserveAspectRatio="xMinYMin meet">
       <style>
-        .cursor { animation: moveCursor 3.5s ease-in-out infinite; }
-        @keyframes moveCursor {
-          0%   { transform: translate(-30px, -20px); opacity: 0; }
-          8%   { opacity: 1; }
-          20%  { transform: translate(0px, 0px); opacity: 1; }
-          40%  { transform: translate(28px, 18px); opacity: 1; }
-          60%  { transform: translate(8px, 36px); opacity: 1; }
-          75%  { transform: translate(36px, 36px); opacity: 1; }
-          92%  { opacity: 1; transform: translate(36px, 36px); }
-          100% { opacity: 0; transform: translate(-30px, -20px); }
+        .cur { animation: mc 3.5s ease-in-out infinite; }
+        @keyframes mc {
+          0%   { transform: translate(-30px,-20px); opacity:0; }
+          8%   { opacity:1; }
+          20%  { transform: translate(0px,0px); opacity:1; }
+          40%  { transform: translate(28px,18px); opacity:1; }
+          60%  { transform: translate(8px,36px); opacity:1; }
+          75%  { transform: translate(36px,36px); opacity:1; }
+          92%  { opacity:1; transform: translate(36px,36px); }
+          100% { opacity:0; transform: translate(-30px,-20px); }
         }
       </style>
       <rect x="20" y="24" width="160" height="112" fill="#9aa0a6"/>
@@ -226,13 +204,12 @@
       <rect x="44" y="84" width="80" height="4" fill="#3c4043"/>
       <rect x="44" y="98" width="56" height="4" fill="#3c4043"/>
       <rect x="44" y="108" width="104" height="4" fill="#3c4043"/>
-      <g class="cursor">
+      <g class="cur">
         <polygon points="112,92 112,118 119,111 124,124 129,122 124,108 132,108" fill="#e8eaed"/>
       </g>
     </svg>
 
-    <!-- IT -->
-    <div id="content-it">
+    <div id="it">
       <div class="title-row">
         <h1>Hai aperto il link dal CV, vero?</h1>
         <div class="lang-badge">
@@ -241,9 +218,7 @@
         </div>
       </div>
       <p class="message">Buona notizia: sei nel posto giusto. Cattiva notizia: il sito non c'è ancora.</p>
-      <p class="message">
-        Sono <strong>Stefano Ciardiello</strong>, Service, UX e Product Designer. Mi occupo di design dalla ricerca al prodotto: user research, customer journey map, workshop, co-design, UX, UI, wireframing, prototipazione.
-      </p>
+      <p class="message">Sono <strong>Stefano Ciardiello</strong>, Service, UX e Product Designer. Mi occupo di design dalla ricerca al prodotto: user research, customer journey map, workshop, co-design, UX, UI, wireframing, prototipazione.</p>
       <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
       <hr class="divider">
       <p class="real-message">
@@ -252,23 +227,11 @@
       </p>
       <div class="actions">
         <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank" rel="noopener">Book a Call</a>
-        <a class="btn btn-primary" href="mailto:steveciardiello@gmail.com">Scrivimi una mail</a>
-      </div>
-      <div class="details-panel" id="details-it">
-        DNS_PROBE_FINISHED_NXDOMAIN<br>
-        Status: Work in Progress<br>
-        Role: Service, UX &amp; Product Designer<br>
-        Location: Verona–Milano (Hybrid / Remote)<br>
-        Experience: Senior<br>
-        Current: Freelance @ Bitmama Reply — ItalGas<br>
-        Co-founder: Acheeva (CDP Venture Capital / FuturED)<br>
-        Education: MSc Product Service System Design — Polimi<br>
-        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub
+        <a class="btn btn-primary" id="mail-it">Scrivimi una mail</a>
       </div>
     </div>
 
-    <!-- EN -->
-    <div id="content-en" style="display:none">
+    <div id="en" style="display:none">
       <div class="title-row">
         <h1>You opened the link from the CV, didn't you?</h1>
         <div class="lang-badge">
@@ -277,38 +240,29 @@
         </div>
       </div>
       <p class="message">Good news: you're in the right place. Bad news: the site isn't ready yet.</p>
-      <p class="message">
-        I'm <strong>Stefano Ciardiello</strong>, Service, UX and Product Designer. I work across the full design process, from research to product: user research, customer journey mapping, workshops, co-design, UX, UI, wireframing, prototyping.
-      </p>
+      <p class="message">I'm <strong>Stefano Ciardiello</strong>, Service, UX and Product Designer. I work across the full design process, from research to product: user research, customer journey mapping, workshops, co-design, UX, UI, wireframing, prototyping.</p>
       <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
       <hr class="divider">
       <p class="real-message">
         I'm putting the finishing touches on my new portfolio, which will be live here soon. In the meantime, if you want to see how I work or take a look at some of the projects I've been part of, let's set up a call.<br><br>
-        Do you have a new project starting up or a product you'd like to improve? Want to find out if we could work well together? <strong>Drop me a line</strong>, I'll get back to you within 24h.
+        Do you have a new project starting up or a product you'd like to improve? Want to find out if we could work well together? <strong>Send me an email</strong>, I'll get back to you within 24h.
       </p>
       <div class="actions">
         <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank" rel="noopener">Book a Call</a>
-        <a class="btn btn-primary" href="mailto:steveciardiello@gmail.com">Send me an email</a>
-      </div>
-      <div class="details-panel" id="details-en">
-        DNS_PROBE_FINISHED_NXDOMAIN<br>
-        Status: Work in Progress<br>
-        Role: Service, UX &amp; Product Designer<br>
-        Location: Verona–Milan (Hybrid / Remote)<br>
-        Experience: Senior<br>
-        Current: Freelance @ Bitmama Reply — ItalGas<br>
-        Co-founder: Acheeva (CDP Venture Capital / FuturED)<br>
-        Education: MSc Product Service System Design — Polimi<br>
-        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub
+        <a class="btn btn-primary" id="mail-en">Send me an email</a>
       </div>
     </div>
 
   </div>
 
   <script>
+    var e = 'steveciardiello' + '@' + 'gmail.com';
+    document.getElementById('mail-it').href = 'mailto:' + e;
+    document.getElementById('mail-en').href = 'mailto:' + e;
+
     function setLang(lang) {
-      document.getElementById('content-it').style.display = lang === 'it' ? 'block' : 'none';
-      document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
+      document.getElementById('it').style.display = lang === 'it' ? 'block' : 'none';
+      document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
     }
   </script>
 
