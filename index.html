@@ -32,39 +32,6 @@
       justify-content: center;
     }
 
-    .lang-switcher {
-      position: fixed;
-      top: 20px;
-      right: 24px;
-      display: flex;
-      gap: 2px;
-      background: var(--surface);
-      border-radius: 999px;
-      padding: 3px;
-      border: 1px solid var(--border);
-    }
-
-    .lang-btn {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      background: transparent;
-      color: var(--text-muted);
-      transition: all 0.15s ease;
-      font-family: inherit;
-    }
-
-    .lang-btn.active {
-      background: var(--btn-bg);
-      color: var(--text-primary);
-    }
-
-    .lang-btn:hover:not(.active) { color: var(--text-secondary); }
-
     .container {
       max-width: 560px;
       width: 100%;
@@ -72,19 +39,60 @@
     }
 
     .design-icon {
-      width: 64px;
-      height: 64px;
+      width: 72px;
+      height: 65px;
       margin-bottom: 24px;
-      opacity: 0.55;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     h1 {
       font-size: 24px;
       font-weight: 400;
       color: var(--text-primary);
-      margin-bottom: 20px;
       letter-spacing: -0.2px;
       line-height: 1.3;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .lang-badge {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .lang-btn {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      padding: 3px 9px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+
+    .lang-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(138, 180, 248, 0.08);
+    }
+
+    .lang-btn:hover:not(.active) {
+      color: var(--text-secondary);
+      border-color: var(--text-secondary);
     }
 
     .message {
@@ -167,21 +175,9 @@
 
     .btn-primary:hover { background: #aecbfa; }
 
-    .details-toggle {
-      font-size: 12px;
-      color: var(--text-muted);
-      cursor: pointer;
-      margin-top: 24px;
-      display: inline-block;
-      user-select: none;
-      transition: color 0.15s;
-    }
-
-    .details-toggle:hover { color: var(--text-secondary); }
-
     .details-panel {
       display: none;
-      margin-top: 12px;
+      margin-top: 20px;
       font-size: 12px;
       color: var(--text-muted);
       font-family: monospace;
@@ -196,80 +192,105 @@
     @media (max-width: 480px) {
       h1 { font-size: 20px; }
       .btn { width: 100%; text-align: center; }
-      .lang-switcher { top: 12px; right: 12px; }
     }
   </style>
 </head>
 <body>
 
-  <div class="lang-switcher">
-    <button class="lang-btn active" id="btn-it" onclick="setLang('it')">IT</button>
-    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
-  </div>
-
   <div class="container">
 
-    <svg class="design-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="10" y="10" width="44" height="44" rx="2" stroke="#9aa0a6" stroke-width="2.5" fill="none"/>
-      <rect x="6" y="6" width="6" height="6" rx="1" fill="#9aa0a6"/>
-      <rect x="52" y="6" width="6" height="6" rx="1" fill="#9aa0a6"/>
-      <rect x="6" y="52" width="6" height="6" rx="1" fill="#9aa0a6"/>
-      <rect x="52" y="52" width="6" height="6" rx="1" fill="#9aa0a6"/>
-      <rect x="16" y="16" width="14" height="10" rx="1.5" stroke="#5f6368" stroke-width="1.5" fill="none"/>
-      <rect x="34" y="16" width="14" height="10" rx="1.5" stroke="#5f6368" stroke-width="1.5" fill="none"/>
-      <line x1="16" y1="32" x2="48" y2="32" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="16" y1="38" x2="40" y2="38" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="16" y1="44" x2="34" y2="44" stroke="#5f6368" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Animated monitor icon -->
+    <svg class="design-icon" viewBox="0 0 200 180" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+      <style>
+        .cursor {
+          animation: moveCursor 3.5s ease-in-out infinite;
+        }
+        @keyframes moveCursor {
+          0%   { transform: translate(-30px, -20px); opacity: 0; }
+          8%   { opacity: 1; }
+          20%  { transform: translate(0px, 0px); opacity: 1; }
+          40%  { transform: translate(28px, 18px); opacity: 1; }
+          60%  { transform: translate(8px, 36px); opacity: 1; }
+          75%  { transform: translate(36px, 36px); opacity: 1; }
+          92%  { opacity: 1; transform: translate(36px, 36px); }
+          100% { opacity: 0; transform: translate(-30px, -20px); }
+        }
+      </style>
+      <rect x="20" y="24" width="160" height="112" fill="#9aa0a6"/>
+      <rect x="32" y="36" width="136" height="88" fill="#202124"/>
+      <rect x="88" y="136" width="24" height="18" fill="#9aa0a6"/>
+      <rect x="64" y="154" width="72" height="10" fill="#9aa0a6"/>
+      <rect x="44" y="52" width="72" height="6" fill="#3c4043"/>
+      <rect x="44" y="64" width="112" height="4" fill="#3c4043"/>
+      <rect x="44" y="74" width="96" height="4" fill="#3c4043"/>
+      <rect x="44" y="84" width="80" height="4" fill="#3c4043"/>
+      <rect x="44" y="98" width="56" height="4" fill="#3c4043"/>
+      <rect x="44" y="108" width="104" height="4" fill="#3c4043"/>
+      <g class="cursor">
+        <polygon points="112,92 112,118 119,111 124,124 129,122 124,108 132,108" fill="#e8eaed"/>
+      </g>
     </svg>
 
     <!-- IT -->
     <div id="content-it">
-      <h1>Hai aperto il link dal CV, vero?</h1>
+      <div class="title-row">
+        <h1>Hai aperto il link dal CV, vero?</h1>
+        <div class="lang-badge">
+          <button class="lang-btn active" id="btn-it" onclick="setLang('it')">IT</button>
+          <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+
       <p class="message">Buona notizia: sei nel posto giusto. Cattiva notizia: il sito non c'è ancora.</p>
       <p class="message">
-        Sono <strong>Stefano Ciardiello</strong> — Service, UX &amp; Product Designer con 10 anni di esperienza.
-        Mi piace lavorare dove i problemi sono ancora senza forma: <a href="mailto:steveciardiello@gmail.com">dalla discovery al prodotto finito</a>, passando per workshop, ricerca, wireframing, branding.
+        Sono <strong>Stefano Ciardiello</strong>, Service, UX e Product Designer. Mi occupo di design dalla ricerca al prodotto: user research, customer journey map, workshop, co-design, UX, UI, wireframing, prototipazione.
       </p>
       <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
       <hr class="divider">
       <p class="real-message">
-        Sto definendo nei dettagli il mio nuovo portfolio dopo 20 anni dalla prima volta.<br><br>
-        Sei curioso di vedere come lavoro o qualche progetto che ho realizzato? Hai un progetto in partenza o un prodotto da migliorare? Vuoi semplicemente capire se possiamo lavorare insieme? <strong>Scrivimi</strong>. Ti rispondo entro 24h.
+        Sto definendo nei dettagli il mio nuovo portfolio, che arriverà presto qui. Nel frattempo, se vuoi vedere come lavoro o vuoi vedere qualche progetto che ho realizzato, organizziamo una call.<br><br>
+        Hai un progetto in partenza o un prodotto da migliorare? Vuoi semplicemente capire se possiamo lavorare insieme? <strong>Scrivimi</strong>, ti rispondo entro 24h.
       </p>
       <div class="actions">
-        <button class="btn btn-ghost" onclick="toggleDetails()">Dettagli tecnici</button>
-        <a class="btn btn-primary" href="mailto:steveciardiello@gmail.com">Scrivimi una mail</a>
+        <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank">Book a Call</a>
+        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#6e1d1a0b180b0d070f1c0a070b0202012e09030f0702400d0103">Scrivimi una mail</a>
       </div>
       <div class="details-panel" id="details-it">
         DNS_PROBE_FINISHED_NXDOMAIN<br>
         Status: Work in Progress<br>
         Role: Service, UX &amp; Product Designer<br>
         Location: Verona–Milano (Hybrid / Remote)<br>
-        Experience: Senior <br>
+        Experience: Senior<br>
         Current: Freelance @ Bitmama Reply — ItalGas<br>
         Co-founder: Acheeva (CDP Venture Capital / FuturED)<br>
         Education: MSc Product Service System Design — Polimi<br>
-        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub<br>
+        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub
       </div>
     </div>
 
     <!-- EN -->
     <div id="content-en" style="display:none">
-      <h1>You opened the link from the CV, didn't you?</h1>
+      <div class="title-row">
+        <h1>You opened the link from the CV, didn't you?</h1>
+        <div class="lang-badge">
+          <button class="lang-btn" id="btn-it-en" onclick="setLang('it')">IT</button>
+          <button class="lang-btn active" id="btn-en-en" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+
       <p class="message">Good news: you're in the right place. Bad news: the site isn't ready yet.</p>
       <p class="message">
-        I'm <strong>Stefano Ciardiello</strong> — Service, UX &amp; Product Designer with 10 years of experience.
-        I work where problems are still shapeless: <a href="mailto:steveciardiello@gmail.com">from discovery to shipped product</a>, through workshops, research, wireframing, branding.
+        I'm <strong>Stefano Ciardiello</strong>, Service, UX and Product Designer. I work across the full design process, from research to product: user research, customer journey mapping, workshops, co-design, UX, UI, wireframing, prototyping.
       </p>
       <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
       <hr class="divider">
       <p class="real-message">
-        I’m putting the last touches to my new portfolio, 20 years on from the first time.<br><br>
-        Are you curious to see how I work or some of my past projects? Do you have a new starting project or a product you’d like to improve? Or do you simply want to find out if we can work together? <strong>Drop me a line</strong>. I'll get back to you within 24h.
+        I'm putting the finishing touches on my new portfolio, which will be live here soon. In the meantime, if you want to see how I work or take a look at some of the projects I've been part of, let's set up a call.<br><br>
+        Do you have a new project starting up or a product you'd like to improve? Want to find out if we could work well together? <strong>Drop me a line</strong>, I'll get back to you within 24h.
       </p>
       <div class="actions">
-        <button class="btn btn-ghost" onclick="toggleDetails()">Technical details</button>
-        <a class="btn btn-primary" href="mailto:steveciardiello@gmail.com">Send me an email</a>
+        <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank">Book a Call</a>
+        <a class="btn btn-primary" href="/cdn-cgi/l/email-protection#a3d0d7c6d5c6c0cac2d1c7cac6cfcfcce3c4cec2cacf8dc0ccce">Send me an email</a>
       </div>
       <div class="details-panel" id="details-en">
         DNS_PROBE_FINISHED_NXDOMAIN<br>
@@ -279,35 +300,18 @@
         Experience: Senior<br>
         Current: Freelance @ Bitmama Reply — ItalGas<br>
         Co-founder: Acheeva (CDP Venture Capital / FuturED)<br>
-        Award: Red Dot Design Award 2025 — Stiga.Go App<br>
         Education: MSc Product Service System Design — Polimi<br>
-        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub<br>
+        Tools: Figma, Miro, Claude Code, Adobe CC, GitHub
       </div>
     </div>
 
   </div>
 
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
     var currentLang = 'it';
-    var detailsOpen = false;
 
     function setLang(lang) {
       currentLang = lang;
       document.getElementById('content-it').style.display = lang === 'it' ? 'block' : 'none';
       document.getElementById('content-en').style.display = lang === 'en' ? 'block' : 'none';
-      document.getElementById('btn-it').classList.toggle('active', lang === 'it');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    }
-
-    function toggleDetails() {
-      detailsOpen = !detailsOpen;
-      var arrow = detailsOpen ? '▼' : '▶';
-      document.getElementById('details-it').classList.toggle('open', detailsOpen);
-      document.getElementById('details-en').classList.toggle('open', detailsOpen);
-      document.getElementById('toggle-it').textContent = arrow + ' Maggiori informazioni';
-      document.getElementById('toggle-en').textContent = arrow + ' More information';
-    }
-  </script>
-
-</body>
-</html>
+      ['btn-it', 'btn-en', 'btn-it-en', 'btn-en-e
