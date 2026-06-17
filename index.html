@@ -1,269 +1,229 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>www.stefanociardiello.com</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Stefano Ciardiello · Site under construction</title>
+  <meta name="description" content="Portfolio of Stefano Ciardiello, Service-Product & UX Designer. Site in progress, online soon." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Self-contained SVG favicon (SC monogram, adapts to dark mode) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><style>rect{fill:%23FAFAF7}text{fill:%230E0E0E}@media(prefers-color-scheme:dark){rect{fill:%230E0E0E}text{fill:%23FAFAF7}}</style><rect width='100' height='100'/><text x='50' y='56' font-family='monospace' font-size='46' font-weight='700' text-anchor='middle' dominant-baseline='central'>SC</text></svg>" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Stefano Ciardiello · Site under construction" />
+  <meta property="og:description" content="Portfolio in progress. Online soon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Fonts: Figtree (sans) + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    /* ---- Design tokens (W3C tokens.json, light) ---- */
     :root {
-      --bg: #202124;
-      --text-primary: #e8eaed;
-      --text-secondary: #9aa0a6;
-      --text-muted: #5f6368;
-      --accent: #8ab4f8;
-      --border: #3c4043;
-      --btn-bg: #3c4043;
-      --btn-hover: #4a4e52;
+      --bianco-carta: #FAFAF7;
+      --nero: #0E0E0E;
+      --blu-segnale: #1D4ED8;
+      --grafite: #2B2B2B;
+      --alluminio: #5A6B8C;
+      --nebbia: #E3E3E0;
+
+      --font-sans: "Figtree", system-ui, -apple-system, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, monospace;
     }
 
-    html, body {
-      height: 100%;
-      background: var(--bg);
-      font-family: 'Figtree', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text-primary);
+    /* ---- Dark mode (automatic, no toggle) ---- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bianco-carta: #0E0E0E;
+        --nero: #FAFAF7;
+        --blu-segnale: #3E61C4;
+        --grafite: #C8C8C8;
+        --alluminio: #A0B0CC;
+        --nebbia: #2B2B2B;
+      }
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      background-color: var(--bianco-carta);
+      color: var(--nero);
+      font-family: var(--font-sans);
+      font-weight: 400;
+      line-height: 1.5;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+      /* Grid inset: max-width 1440px, padding 24/48/64-80px */
+      padding: 24px;
     }
 
-    .container {
-      max-width: 560px;
+    @media (min-width: 768px) {
+      body { padding: 48px; }
+    }
+
+    @media (min-width: 1280px) {
+      body { padding: 80px 64px; }
+    }
+
+    .page {
       width: 100%;
-      padding: 40px 24px;
-    }
-
-    .design-icon {
-      width: 60px;
-      height: 54px;
-      margin-bottom: 24px;
-      display: block;
-      overflow: visible;
-    }
-
-    .title-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-
-    h1 {
-      font-size: 24px;
-      font-weight: 500;
-      color: var(--text-primary);
-      letter-spacing: -0.2px;
-      line-height: 1.3;
+      max-width: 1440px;
+      margin: 0 auto;
       flex: 1;
-      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: clamp(48px, 8vw, 96px);
     }
 
-    .lang-badge {
-      display: flex;
-      gap: 4px;
+    /* ---- Status eyebrow (mono, uppercase, alluminio) ---- */
+    .status {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--alluminio);
+      display: inline-flex;
       align-items: center;
-      flex-shrink: 0;
-      margin-top: 2px;
+      gap: 12px;
     }
 
-    .lang-btn {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      background: transparent;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text-muted);
-      padding: 4px 10px;
-      min-width: 24px;
-      min-height: 24px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.15s;
+    .dot {
+      width: 6px;
+      height: 6px;
+      flex: none;
+      background-color: var(--blu-segnale);
+      animation: blink 2500ms steps(1, end) infinite;
     }
 
-    .lang-btn.active {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(138, 180, 248, 0.08);
+    @keyframes blink {
+      0%, 60% { opacity: 1; }
+      61%, 100% { opacity: 0; }
     }
 
-    .lang-btn:hover:not(.active) {
-      color: var(--text-secondary);
-      border-color: var(--text-secondary);
-    }
-
-    .message {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .message strong { color: var(--text-primary); font-weight: 500; }
-
-    .error-code {
-      font-size: 12px;
-      color: var(--text-muted);
-      font-family: monospace;
-      margin-top: 4px;
-      margin-bottom: 28px;
-      letter-spacing: 0.5px;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 28px 0;
-    }
-
-    .real-message {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 24px;
-    }
-
-    .real-message strong { color: var(--text-primary); font-weight: 500; }
-
-    .actions {
+    /* ---- Hero ---- */
+    .hero {
       display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 4px;
+      flex-direction: column;
+      gap: clamp(20px, 3vw, 32px);
     }
 
-    .btn {
-      padding: 9px 22px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-family: inherit;
+    .name {
+      font-family: var(--font-sans);
       font-weight: 500;
-      cursor: pointer;
-      border: none;
-      transition: background 0.15s ease, color 0.15s ease;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      /* text-display, fluid clamp */
+      font-size: clamp(2.5rem, 8vw, 5.5rem);
+    }
+
+    .role {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--alluminio);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lead {
+      max-width: 52ch;
+      /* body-read: 17px, line-height 1.6 */
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--grafite);
+    }
+
+    .lead p + p {
+      margin-top: 1em;
+    }
+
+    /* ---- Footer / contact ---- */
+    .foot {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      align-items: baseline;
+      padding-top: 24px;
+      border-top: 1px solid var(--nebbia);
+    }
+
+    .meta {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--alluminio);
+    }
+
+    a {
+      color: var(--blu-segnale);
       text-decoration: none;
-      display: inline-block;
-      white-space: nowrap;
+      font-weight: 500;
     }
 
-    .btn-ghost {
-      background: var(--btn-bg);
-      color: var(--text-secondary);
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
-    .btn-ghost:hover {
-      background: var(--btn-hover);
-      color: var(--text-primary);
+    /* ---- Focus (2px blu-segnale + 2px offset) ---- */
+    a:focus-visible {
+      outline: 2px solid var(--blu-segnale);
+      outline-offset: 2px;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #202124;
-      font-weight: 600;
-    }
-
-    .btn-primary:hover { background: #aecbfa; }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 20px; }
+    /* ---- Reduced motion ---- */
+    @media (prefers-reduced-motion: reduce) {
+      .dot { animation: none; opacity: 1; }
     }
   </style>
 </head>
 <body>
+  <main class="page">
+    <p class="status">
+      <span class="dot" aria-hidden="true"></span>
+      Work in progress
+    </p>
 
-  <div class="container">
-
-    <svg class="design-icon" viewBox="0 0 200 185" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" preserveAspectRatio="xMinYMin meet">
-      <style>
-        .cur { animation: mc 3.5s ease-in-out infinite; }
-        @keyframes mc {
-          0%   { transform: translate(-30px,-20px); opacity:0; }
-          8%   { opacity:1; }
-          20%  { transform: translate(0px,0px); opacity:1; }
-          40%  { transform: translate(28px,18px); opacity:1; }
-          60%  { transform: translate(8px,36px); opacity:1; }
-          75%  { transform: translate(36px,36px); opacity:1; }
-          92%  { opacity:1; transform: translate(36px,36px); }
-          100% { opacity:0; transform: translate(-30px,-20px); }
-        }
-      </style>
-      <rect x="20" y="24" width="160" height="112" fill="#9aa0a6"/>
-      <rect x="32" y="36" width="136" height="88" fill="#202124"/>
-      <rect x="88" y="136" width="24" height="18" fill="#9aa0a6"/>
-      <rect x="64" y="154" width="72" height="10" fill="#9aa0a6"/>
-      <rect x="44" y="52" width="72" height="6" fill="#3c4043"/>
-      <rect x="44" y="64" width="112" height="4" fill="#3c4043"/>
-      <rect x="44" y="74" width="96" height="4" fill="#3c4043"/>
-      <rect x="44" y="84" width="80" height="4" fill="#3c4043"/>
-      <rect x="44" y="98" width="56" height="4" fill="#3c4043"/>
-      <rect x="44" y="108" width="104" height="4" fill="#3c4043"/>
-      <g class="cur">
-        <polygon points="112,92 112,118 119,111 124,124 129,122 124,108 132,108" fill="#e8eaed"/>
-      </g>
-    </svg>
-
-    <div id="it">
-      <div class="title-row">
-        <h1>Hai aperto il link dal CV, vero?</h1>
-        <div class="lang-badge">
-          <button class="lang-btn active" onclick="setLang('it')">IT</button>
-          <button class="lang-btn" onclick="setLang('en')">EN</button>
-        </div>
-      </div>
-      <p class="message">Buona notizia: sei nel posto giusto. Cattiva notizia: il sito non c'è ancora.</p>
-      <p class="message">Sono <strong>Stefano Ciardiello</strong>, Service, UX e Product Designer. Mi occupo di design dalla ricerca al prodotto: user research, customer journey map, workshop, co-design, UX, UI, wireframing, prototipazione.</p>
-      <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
-      <hr class="divider">
-      <p class="real-message">
-        Sto definendo nei dettagli il mio nuovo portfolio, che arriverà presto qui. Nel frattempo, se vuoi vedere come lavoro o vuoi vedere qualche progetto che ho realizzato, organizziamo una call.<br><br>
-        Hai un progetto in partenza o un prodotto da migliorare? Vuoi semplicemente capire se possiamo lavorare insieme? <strong>Scrivimi</strong>, ti rispondo entro 24h.
+    <section class="hero">
+      <h1 class="name">Stefano Ciardiello</h1>
+      <p class="role">
+        <span class="dot" aria-hidden="true"></span>
+        Service-Product &amp; UX Designer
       </p>
-      <div class="actions">
-        <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank" rel="noopener">Book a Call</a>
-        <a class="btn btn-primary" id="mail-it">Scrivimi una mail</a>
+      <div class="lead">
+        <p>The site is in progress. Online soon.</p>
+        <p>To talk about a project, get in touch.</p>
       </div>
-    </div>
+    </section>
 
-    <div id="en" style="display:none">
-      <div class="title-row">
-        <h1>You opened the link from the CV, didn't you?</h1>
-        <div class="lang-badge">
-          <button class="lang-btn" onclick="setLang('it')">IT</button>
-          <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        </div>
-      </div>
-      <p class="message">Good news: you're in the right place. Bad news: the site isn't ready yet.</p>
-      <p class="message">I'm <strong>Stefano Ciardiello</strong>, Service, UX and Product Designer. I work across the full design process, from research to product: user research, customer journey mapping, workshops, co-design, UX, UI, wireframing, prototyping.</p>
-      <p class="error-code">STATUS: REDESIGNING_THE_REDESIGN</p>
-      <hr class="divider">
-      <p class="real-message">
-        I'm putting the finishing touches on my new portfolio, which will be live here soon. In the meantime, if you want to see how I work or take a look at some of the projects I've been part of, let's set up a call.<br><br>
-        Do you have a new project starting up or a product you'd like to improve? Want to find out if we could work well together? <strong>Send me an email</strong>, I'll get back to you within 24h.
-      </p>
-      <div class="actions">
-        <a class="btn btn-ghost" href="https://calendar.app.google/SYSHR3QN6u6Y1mBM6" target="_blank" rel="noopener">Book a Call</a>
-        <a class="btn btn-primary" id="mail-en">Send me an email</a>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    var e = 'steveciardiello' + '@' + 'gmail.com';
-    document.getElementById('mail-it').href = 'mailto:' + e;
-    document.getElementById('mail-en').href = 'mailto:' + e;
-
-    function setLang(lang) {
-      document.getElementById('it').style.display = lang === 'it' ? 'block' : 'none';
-      document.getElementById('en').style.display = lang === 'en' ? 'block' : 'none';
-    }
-  </script>
-
+    <footer class="foot">
+      <span class="meta">Contact</span>
+      <a href="mailto:steveciardiello@gmail.com">steveciardiello@gmail.com</a>
+      <span class="meta">© 2026 Stefano Ciardiello</span>
+    </footer>
+  </main>
 </body>
 </html>
